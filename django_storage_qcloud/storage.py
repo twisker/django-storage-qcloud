@@ -12,6 +12,8 @@ class QcloudStorage(Storage):
     def __init__(self, option=None):
         if not option:
             self.option = settings.QCLOUD_STORAGE_OPTION
+        else:
+            self.option = option
         self.config = CosConfig(Region=self.option['Region'], SecretId=self.option['SecretId'],
                                 SecretKey=self.option['SecretKey'], Token=self.option.get('Token'))
         self.bucket = self.option['Bucket']
