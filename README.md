@@ -27,10 +27,17 @@ git+https://github.com/fordguo/django-storage-qcloud.git
 ```
 
 - 配置 setting.py:
+  - 设置一个统一的项目前缀【可选】，如果设置了这个前缀，则所有存储都会放在Bucket里的这个前缀所标的目录下。
+    - COS_URL_BASE = 'your_project'
+  - 为区分Static静态文件和Media文件的不同存储需求，提供了两个Storage，分别是
+    - django_storage_qcloud.storage.QcloudMediaStorage
+    - django_storage_qcloud.storage.QcloudStaticStorage
+  - 以上两个Storage会根据settings里的BASE_DIR、MEDIA_ROOT、STATIC_ROOT三个变量，自动推断出静态文件
+    和Media文件的不同存储目录，并把文件正确存储到相应的位置
   - 将上传文件存放到云
-    `DEFAULT_FILE_STORAGE = 'django_storage_qcloud.storage.QcloudStorage'`
+    `DEFAULT_FILE_STORAGE = 'django_storage_qcloud.storage.QcloudMediaStorage'`
   - 将静态文件存放到云
-    `STATICFILES_STORAGE = 'django_storage_qcloud.storage.QcloudStorage'`
+    `STATICFILES_STORAGE = 'django_storage_qcloud.storage.QcloudStaticStorage'`
   - 替换 SecretId， SecretKey, Region, Bucket 的值
   ```
   QCLOUD_STORAGE_OPTION = {

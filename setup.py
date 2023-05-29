@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import os
+import codecs
 
 from setuptools import (
     setup,
@@ -12,7 +13,7 @@ from setuptools import (
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-with open("README.md", "r") as fh:
+with codecs.open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 NAME = "django-storage-qcloud"
